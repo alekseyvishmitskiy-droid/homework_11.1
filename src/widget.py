@@ -42,22 +42,20 @@ def mask_card_and_account(data: str) -> str:
         return f"{name} {masked_number}"
 
     except ValueError as e:
-        # Ошибка из masks
         return f"Ошибка: {e}"
 
 
 def get_date(date_string: str) -> str:
     """Преобразует дату в ДД.ММ.ГГГГ."""
     try:
-        # Извлекаем только дату (до символа T)
         date_part = date_string.split("T")[0]
         year, month, day = date_part.split("-")
         return f"{day}.{month}.{year}"
-    except ValueError as IndexError:
-          return "Ошибка: Неверный формат входных данных"
+    except IndexError:
+        return "Ошибка: Неверный формат входных данных"
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     """Запрашиваем данные у пользователя"""
     card_info = input("Введите данные карты или счета: ")
     print(mask_card_and_account(card_info))

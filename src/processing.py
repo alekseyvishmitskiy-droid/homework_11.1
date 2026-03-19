@@ -17,15 +17,19 @@ state соответствует указанному значению.
 """
 
 
-def filter_by_state(data: list[dict[str, Any]], state: str = "EXECUTED") -> list[dict[str, Any]]:
+def filter_by_state(
+    data: list[dict[str, Any]], state: str = "EXECUTED"
+) -> list[dict[str, Any]]:
     return [item for item in data if item.get("state") == state]
 
 
-def sort_by_date(data: list[dict[str, Any]], reverse: bool = True) -> list[dict[str, Any]]:
+def sort_by_date(
+    data: list[dict[str, Any]], reverse: bool = True
+) -> list[dict[str, Any]]:
     return sorted(data, key=lambda x: str(x.get("date", "")), reverse=reverse)
 
 
-def main() -> None:  # pragma: no cover
+def main() -> None:
     user_input = input("Введите список транзакций:")
 
     try:
@@ -44,9 +48,9 @@ def main() -> None:  # pragma: no cover
         print("\n# Весь список, отсортированный по дате (от новых к старым):")
         print(sort_by_date(data))
 
-    except ValueError as SyntaxError:
+    except SyntaxError:
         print("Ошибка: Некорректный формат данных.")
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     main()

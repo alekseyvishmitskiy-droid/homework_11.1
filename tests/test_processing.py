@@ -2,7 +2,6 @@ import pytest
 from src.widget import mask_card_and_account, get_date
 
 
-
 @pytest.mark.parametrize(
     "input_string, expected",
     [

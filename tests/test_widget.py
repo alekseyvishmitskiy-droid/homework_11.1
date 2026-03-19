@@ -34,14 +34,14 @@ def test_filter_by_state_empty(transactions):
 def test_sort_by_date_desc(transactions):
     """Сортировка от новых к старым (по умолчанию)"""
     result = sort_by_date(transactions)
-    assert result[0]["id"] == 2  # 2024 год
-    assert result[2]["id"] == 3  # 2022 год
+    assert result[0]["id"] == 2
+    assert result[2]["id"] == 3
 
 
 def test_sort_by_date_asc(transactions):
     """Сортировка от старых к новым (reverse=False)"""
     result = sort_by_date(transactions, reverse=False)
-    assert result[0]["id"] == 3  # 2022 год
+    assert result[0]["id"] == 3
 
 
 def test_sort_by_date_no_date():
@@ -60,7 +60,6 @@ def test_filter_empty_list():
 def test_filter_no_state_key():
     """Тест случая, когда в словаре нет ключа 'state'"""
     data = [{"id": 1}, {"state": "EXECUTED", "id": 2}]
-    # .get() вернет None, и элемент с id: 1 не попадет в список
     assert filter_by_state(data) == [{"state": "EXECUTED", "id": 2}]
 
 

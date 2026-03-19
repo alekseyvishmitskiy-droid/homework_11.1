@@ -2,7 +2,6 @@ import pytest
 from src.masks import get_mask_card_number, get_mask_account
 
 
-
 def test_get_mask_card_number_valid():
     """Проверка корректного номера карты"""
     assert get_mask_card_number("1234567812345678") == "1234 56** **** 5678"

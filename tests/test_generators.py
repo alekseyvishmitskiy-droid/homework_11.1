@@ -2,12 +2,19 @@ import pytest
 from typing import Any, Generator, Iterable
 
 
+def filter_by_currency(
+    transactions: list[dict[str, Any]], currency: str
+) -> Iterable[dict[str, Any]]:
+    return (
+        tx
+        for tx in transactions
+        if tx.get("operationAmount", {}).get("currency", {}).get("code") == currency
+    )
 
-def filter_by_currency(transactions: list[dict[str, Any]], currency: str) -> Iterable[dict[str, Any]]:
-    return (tx for tx in transactions if tx.get("operationAmount", {}).get("currency", {}).get("code") == currency)
 
-
-def transaction_descriptions(transactions: list[dict[str, Any]]) -> Generator[str, None, None]:
+def transaction_descriptions(
+    transactions: list[dict[str, Any]],
+) -> Generator[str, None, None]:
     for tx in transactions:
         yield tx.get("description", "Описание отсутствует")
 
