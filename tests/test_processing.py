@@ -40,6 +40,7 @@ def test_get_date_invalid_format():
     """Проверка реакции на неверный формат строки даты"""
     assert get_date("неправильная-дата") == "Ошибка: Неверный формат входных данных"
 
+
 @pytest.fixture
 def sample_data():
     return [
@@ -54,6 +55,7 @@ def test_filter_by_state(sample_data):
     result = filter_by_state(sample_data, "EXECUTED")
     assert len(result) == 2  # подставьте актуальное число из ваших данных
     assert all(item["state"] == "EXECUTED" for item in result)
+
 
 def test_sort_by_date(sample_data):
     """Проверка сортировки по дате"""
