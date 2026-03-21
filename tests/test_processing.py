@@ -1,5 +1,7 @@
 import pytest
-from src.widget import mask_card_and_account, get_date
+
+from src.processing import filter_by_state, sort_by_date
+from src.widget import get_date, mask_card_and_account
 
 
 @pytest.mark.parametrize(
@@ -37,3 +39,23 @@ def test_get_date_valid(date_input, expected_date):
 def test_get_date_invalid_format():
     """Проверка реакции на неверный формат строки даты"""
     assert get_date("неправильная-дата") == "Ошибка: Неверный формат входных данных"
+
+@pytest.fixture
+def sample_data():
+    return [
+        {"id": 1, "state": "EXECUTED", "date": "2024-01-01T12:00:00"},
+        {"id": 2, "state": "CANCELED", "date": "2023-12-01T12:00:00"},
+        {"id": 3, "state": "EXECUTED", "date": "2024-02-01T12:00:00"},
+    ]
+
+
+def test_filter_by_state(sample_data):
+    """Проверка фильтрации по статусу"""
+    result = filter_by_state(sample_data, "EXECUTED")
+    assert len(result) == 2  # подставьте актуальное число из ваших данных
+    assert all(item["state"] == "EXECUTED" for item in result)
+
+def test_sort_by_date(sample_data):
+    """Проверка сортировки по дате"""
+    result = sort_by_date(sample_data)
+    assert result[0]["date"] > result[-1]["date"]

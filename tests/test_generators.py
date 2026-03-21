@@ -1,5 +1,6 @@
-import pytest
 from typing import Any, Generator, Iterable
+
+import pytest
 
 
 def filter_by_currency(

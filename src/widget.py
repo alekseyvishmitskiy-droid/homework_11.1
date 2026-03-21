@@ -49,16 +49,14 @@ def get_date(date_string: str) -> str:
     """Преобразует дату в ДД.ММ.ГГГГ."""
     try:
         date_part = date_string.split("T")[0]
-        year, month, day = date_part.split("-")
+
+        parts = date_part.split("-")
+
+        if len(parts) != 3:
+            raise ValueError
+
+        year, month, day = parts
         return f"{day}.{month}.{year}"
-    except IndexError:
+
+    except (IndexError, ValueError):
         return "Ошибка: Неверный формат входных данных"
-
-
-if __name__ == "__main__":
-    """Запрашиваем данные у пользователя"""
-    card_info = input("Введите данные карты или счета: ")
-    print(mask_card_and_account(card_info))
-
-    date_info = input("Введите дату: ")
-    print(get_date(date_info))
